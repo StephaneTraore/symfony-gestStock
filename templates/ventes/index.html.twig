@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ventes index{% endblock %}
+
+{% block body %}
+    <h1>Contenu de la table vente </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>Prix</th>
+                <th>DateVente</th>
+                <th>Nom Produit</th>
+                <th>Nom client</th>
+                
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vente in ventes %}
+            <tr>
+                <td>{{ vente.id }}</td>
+                <td>{{ vente.quantite }}</td>
+                <td>{{ vente.prix }}</td>
+                <td>{{ vente.dateVente ? vente.dateVente|date('Y-m-d') : '' }}</td>
+                <td>{{ vente.nomProduit }}</td>
+                <td>{{ vente.nomClient }}</td>
+                
+               
+                <td>
+                  <button class="btn btn-primary">  <a class="text-white" href="{{ path('app_ventes_show', {'id': vente.id}) }}">Afficher</a></button>
+                   <button class="btn btn-info"> <a class="text-white" href="{{ path('app_ventes_edit', {'id': vente.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <button  class="btn btn-primary mb-2"> <a class="text-white" href="{{ path('app_ventes_new') }}">Ajouter une nouvelle vente </a></button>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Appros{% endblock %}
+
+{% block body %}
+<hr>
+    <h2>Ajouter un approvisionnement</h2>
+
+    {{ include('appros/_form.html.twig') }}
+
+    {# <a href="{{ path('app_appros_index') }}">back to list</a> #}
+{% endblock %}

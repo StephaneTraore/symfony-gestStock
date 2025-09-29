@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes index{% endblock %}
+
+{% block body %}
+    <h1>Contenu de la table commande </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateCommande</th>
+                <th>Quantite</th>
+                <th>Nom Produit</th>
+                <th>Nom client</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.quantite }}</td>
+                <td>{{ commande.nomProduit }}</td>
+                <td>{{ commande.nonClient }}</td>
+                <td>
+                  <button class="btn btn-primary">  <a class="text-white" href="{{ path('app_commandes_show', {'id': commande.id}) }}">Afficher</a></button>
+                  <button class="btn btn-info">  <a class="text-white" href="{{ path('app_commandes_edit', {'id': commande.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun Enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <button class="btn btn-primary"> <a class="text-white" href="{{ path('app_commandes_new') }}">Ajouter une nouvelle commande</a></button>
+{% endblock %}

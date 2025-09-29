@@ -1,0 +1,77 @@
+{# {% extends 'base.html.twig' %} #}
+
+
+{% block body %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+
+  
+<main class="container">
+    <section class="row">
+        <div class="col-12">
+            <h1> Votre panier </h1>
+            <p> Bienvenu dans notre boutique </p>
+        </div>
+
+              <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Prix</th>
+                            <th>Quantité</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for element in data %}
+                            <tr>
+                                <td>{{ element.Produits.nomProduit }}</td>
+                                 <td>{{ element.Produits.prixProduit }} GNF </td>
+                                <td>{{ element.quantity }}</td>
+                                <td>{{ element.quantity * element.Produits.prixProduit }} GNF </td> 
+                                <td>
+                                    <a href="{{ path('cart_add', {id: element.Produits.id}) }}" class="btn btn-success">+</a>
+                                    <a href="{{ path('cart_remove', {id: element.Produits.id}) }}" class="btn btn-warning">-</a>
+                                    <a href="{{ path('cart_delete', {id: element.Produits.id}) }}" class="btn btn-danger">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Votre panier est vide</td>
+                            </tr>    
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total</td>
+                            <td>{{ total  }} GNF</td>
+                            <td>
+                                <a href="{{ path('cart_empty') }}" class="btn btn-danger">Vider</a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a href="{{ path('app_orders_add') }}" class="btn btn-primary mb-2">Valider le panier</a>
+            </div>
+
+            <a class="btn btn-primary" href="{{path('vers_e_commerce')}}">E-commerce</a>
+             {# <a href="macategorie/{categorie}">Les Produits</a> #}
+
+        
+
+
+    </section>
+
+
+</main>
+
+
+
+{% endblock %}

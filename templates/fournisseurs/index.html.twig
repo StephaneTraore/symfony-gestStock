@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseurs index{% endblock %}
+
+{% block body %}
+    <h1>Contenu de la table fournisseur</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomFournisseur</th>
+                <th>PrenomFournisseur</th>
+                <th>AdresseFournisseur</th>
+                <th>TelephoneFournisseur</th>
+                <th>EmailFournisseur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fournisseur in fournisseurs %}
+            <tr>
+                <td>{{ fournisseur.id }}</td>
+                <td>{{ fournisseur.nomFournisseur }}</td>
+                <td>{{ fournisseur.prenomFournisseur }}</td>
+                <td>{{ fournisseur.adresseFournisseur }}</td>
+                <td>{{ fournisseur.telephoneFournisseur }}</td>
+                <td>{{ fournisseur.emailFournisseur }}</td>
+                <td>
+                  <button class="btn btn-primary">  <a class="text-white" href="{{ path('app_fournisseurs_show', {'id': fournisseur.id}) }}">Afficher</a></button>
+                  <button class="btn btn-info"> <a class="text-white" href="{{ path('app_fournisseurs_edit', {'id': fournisseur.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <button class="btn btn-primary mb-2"> <a class="text-white" href="{{ path('app_fournisseurs_new') }}">Ajouter un nouveau fourniseur </a></button>
+{% endblock %}

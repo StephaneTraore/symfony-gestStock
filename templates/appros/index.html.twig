@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appros index{% endblock %}
+
+{% block body %}
+    <h2>Contenu de la table approvisionnement</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>Prix</th>
+                <th>DateAppros</th>
+                <th>Nom fournisseur</th>
+                <th>Nom produit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for appro in appros %}
+            <tr>
+                <td>{{ appro.id }}</td>
+                <td>{{ appro.quantite }}</td>
+                <td>{{ appro.prix }}</td>
+                <td>{{ appro.dateAppros ? appro.dateAppros|date('Y-m-d') : '' }}</td>
+                <td>{{ appro.nomFornisseur }}</td>
+                <td>{{ appro.nomProduit }}</td>
+                <td>
+                   <button class="btn btn-primary"> <a class="text-white" href="{{ path('app_appros_show', {'id': appro.id}) }}">Afficher</a></button>
+                  <button class=" btn btn-info">  <a class="text-white" href="{{ path('app_appros_edit', {'id': appro.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <button class="btn btn-primary"> <a class="text-white" href="{{ path('app_appros_new') }}">Ajouter un nouveau approvisionnement</a></button>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits index{% endblock %}
+
+{% block body %}
+    <h1>Contenu de la table produit</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom Produit</th>
+                <th>Categories Produit</th>
+                <th>Description Produit</th>
+                <th>Prix Produit</th>
+                <th>Date Fabrication</th>
+                <th>Date Expiration</th>
+                <th>Nom image</th>
+                <th>Id categorie</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in pagination %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.nomProduit }}</td>
+                <td>{{ produit.categoriesProduit }}</td>
+                <td>{{ produit.descriptionProduit }}</td>
+                <td>{{ produit.prixProduit }}</td>
+                <td>{{ produit.dateFabrication ? produit.dateFabrication|date('Y-m-d') : '' }}</td>
+                <td>{{ produit.dateExpiration ? produit.dateExpiration|date('Y-m-d') : '' }}</td>
+                <td>{{ produit.imageName }}</td>
+                <td>{{ produit.idCategorie }}</td>
+                
+                <td>
+                   <button class="btn btn-primary mb-2"> <a class="text-white" href="{{ path('app_produits_show', {'id': produit.id}) }}">Afficher</a></button>
+                    <button class="btn btn-info"><a class="text-white" href="{{ path('app_produits_edit', {'id': produit.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+        
+    </table>
+
+   <button class="btn btn-primary mb-1"> <a class="text-white" href="{{ path('app_produits_new') }}">Ajouter un nouveau</a></button>
+  <h5 class="mb-3"> {{knp_pagination_render(pagination)}}</h5>
+{% endblock %}

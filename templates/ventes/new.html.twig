@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ventes{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une nouvelle vente </h1>
+
+    {{ include('ventes/_form.html.twig') }}
+
+   {# <button class="btn btn-primary mb-2"> <a class="text-white" href="{{ path('app_ventes_index') }}">La liste des ventes</a></button> #}
+{% endblock %}

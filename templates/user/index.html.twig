@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Contenu de la table utilisateur{% endblock %}
+
+{% block body %}
+    <h3>Contenu de la table utilisateur</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Date-de-creation</th>
+                <th>Date-Naissance</th>
+                
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.nom}}</td>
+                <td>{{ user.DateCreation ? user.DateCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>
+                   <button class="btn btn-primary mb-2"> <a class="text-white" href="{{ path('app_user_show', {'id': user.id}) }}">Afficher</a></button>
+                    <button class="btn btn-info"><a class="text-white"href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun Enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <button class="btn btn-primary mb-2"> <a class="text-white" href="{{ path('app_user_new') }}">Créer un nouveau</a></button>
+{% endblock %}

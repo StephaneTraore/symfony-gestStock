@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+    <h1>Produits</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>NomProduit</th>
+                <td>{{ produit.nomProduit }}</td>
+            </tr>
+            <tr>
+                <th>CategoriesProduit</th>
+                <td>{{ produit.categoriesProduit }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionProduit</th>
+                <td>{{ produit.descriptionProduit }}</td>
+            </tr>
+            <tr>
+                <th>PrixProduit</th>
+                <td>{{ produit.prixProduit }}</td>
+            </tr>
+            <tr>
+                <th>DateFabrication</th>
+                <td>{{ produit.dateFabrication ? produit.dateFabrication|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateExpiration</th>
+                <td>{{ produit.dateExpiration ? produit.dateExpiration|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>image produit</th>
+                <td><img style="max-width: 200px" src="{{vich_uploader_asset(produit,'imageFile')}}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary mb-2"><a class="text-white" href="{{ path('app_produits_index') }}">liste des produits</a>
+
+   <button class="btn btn-info ml-1 mr-1 mb-2"> <a class="text-white" href="{{ path('app_produits_edit', {'id': produit.id}) }}">Modifier</a>
+
+    {{ include('produits/_delete_form.html.twig') }}
+{% endblock %}

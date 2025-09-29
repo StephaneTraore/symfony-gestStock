@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stocks index{% endblock %}
+
+{% block body %}
+    <h1>Stocks index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>PrixUnitaire</th>
+                <th>DateReception</th>
+                <th>Nom Prosuit</th>
+                <th>Nom Fournisseur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.id }}</td>
+                <td>{{ stock.quantite }}</td>
+                <td>{{ stock.prixUnitaire }}</td>
+                <td>{{ stock.dateReception ? stock.dateReception|date('Y-m-d') : '' }}</td>
+                <td>{{ stock.nomProduit }}</td>
+                <td>{{ stock.nomFournisseur }}</td>
+                <td>
+                 <button class=" btn btn-primary">   <a class="text-white" href="{{ path('app_stocks_show', {'id': stock.id}) }}">Afficher</a></button>
+                 <button class="btn btn-info">   <a class="text-white" href="{{ path('app_stocks_edit', {'id': stock.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <button class="btn btn-primary"> <a class="text-white" href="{{ path('app_stocks_new') }}">Ajouter</a></button>
+{% endblock %}

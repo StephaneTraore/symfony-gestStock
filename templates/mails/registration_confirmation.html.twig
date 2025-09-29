@@ -1,0 +1,8 @@
+<h1> confirmation de votre compte </h1>
+
+<p>
+bonjour, {{user.prenom}} </p> et bienvenu sur Stock Manager.<br><br>
+Veuillez confirmer votre compte des maintenant en cliquant sur le lien ci-dessous<br><br>
+A savoir ce lien est valable jusqu'au <strong>{{lifeTimeToken }} </strong> apres cette date il ne sera plus valable<br><br>
+<a href="{{absolute_url(path('account_verify',{token: token, id: user.id}))}}">Verifier mon compte</a></br></br>
+<strong> ce ci est un email automatique veuillez ne pas repondre.</strong></br></br>
